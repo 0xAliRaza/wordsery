@@ -15,7 +15,6 @@ mix.js('resources/js/app.js', 'public/js')
     .vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
-        require('tailwindcss'),
         require('autoprefixer'),
     ])
     .webpackConfig(require('./webpack.config'));
@@ -23,3 +22,6 @@ mix.js('resources/js/app.js', 'public/js')
 if (mix.inProduction()) {
     mix.version();
 }
+
+mix.browserSync("localhost:8000");
+mix.disableNotifications();

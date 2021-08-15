@@ -1,33 +1,61 @@
 <template>
     <Head title="Dashboard" />
 
-    <BreezeAuthenticatedLayout>
+    <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="">
                 Dashboard
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        You're logged in!
+        <div class="">
+
+                    <div class="">
+                        You're logged in! test xdssasdf
                     </div>
-                </div>
-            </div>
+                    <div v-if="post">{{post.data}}</div>
+
+                    <form @submit.prevent="submit">
+                        <input type="text" v-model="form.data" />
+                        <button type="submit">submit</button>
+                    </form>
         </div>
-    </BreezeAuthenticatedLayout>
+    </AuthenticatedLayout>
 </template>
 
 <script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
-import { Head } from '@inertiajs/inertia-vue3';
+import AuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { reactive, ref } from "@vue/reactivity";
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
     components: {
-        BreezeAuthenticatedLayout,
+        AuthenticatedLayout,
         Head,
     },
-}
+    props: {
+        post: {type: Object, required: false},
+    },
+    setup(props) {
+        const form = reactive({
+            data: null,
+        });
+        const submit = async () => {
+            await Inertia.post(
+                "/post",
+                form,
+                {
+                    preserveState: true,
+                    preserveScroll: true,
+                    onSuccess: (res) => {
+                        console.log(res);
+                    },
+                },
+                { resetOnSuccess: false }
+            );
+        };
+        return { form, submit };
+    },
+};
 </script>

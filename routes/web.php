@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', ['post' => Post::latest('created_at')->first()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/post', [PostController::class, 'store'])->middleware(['auth', 'verified']);
+
+
+
 
 require __DIR__.'/auth.php';

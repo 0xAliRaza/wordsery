@@ -22,9 +22,10 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      # MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      #MYSQL_PASSWORD: ${DB_PASSWORD}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
@@ -50,8 +51,8 @@ services:
       environment:
       - PMA_HOST=db
       - MYSQL_USERNAME=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      #- MYSQL_PASSWORD=${DB_PASSWORD}
+      #- MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       restart: unless-stopped
       ports:
       - 8081:80
