@@ -3,39 +3,59 @@
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="">
-                Dashboard
-            </h2>
+            <h2 class="">Dashboard</h2>
         </template>
 
         <div class="">
+            <div class="">You're logged in!</div>
+            <div v-if="post" v-html="post.data"></div>
 
-                    <div class="">
-                        You're logged in! test xdssasdf
-                    </div>
-                    <div v-if="post">{{post.data}}</div>
-
-                    <form @submit.prevent="submit">
-                        <input type="text" v-model="form.data" />
-                        <button type="submit">submit</button>
-                    </form>
+            <div class="centered-editor">
+                <div class="input-group mb-3">
+                    <select class="form-select" aria-label="Select post type">
+                        <option selected>Post type</option>
+                        <option value="note">Note</option>
+                        <option value="summary">Summary</option>
+                    </select>
+                </div>
+                <editor
+                    initialValue="<p>Initial editor content</p>"
+                    apiKey="is6rpblo337k1uxj8x1yvvf8qd5oj4scymd865g6ti1z156p"
+                    :init="{
+                        menubar: false,
+                        statusbar: false,
+                        plugins: [
+                            'advlist autolink lists link image fullscreen media paste wordcount',
+                        ],
+                        toolbar:
+                            'bold italic link | h2 h3 bullist numlist | image media fullscreen ',
+                    }"
+                    v-model="form.data"
+                >
+                </editor>
+                <button class="btn btn-primary btn-lg" @click.prevent="submit">
+                    Post
+                </button>
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script>
 import AuthenticatedLayout from "@/Layouts/Authenticated.vue";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { reactive, ref } from "@vue/reactivity";
+import Editor from "@tinymce/tinymce-vue";
+import { Head } from "@inertiajs/inertia-vue3";
+import { reactive } from "@vue/reactivity";
 import { Inertia } from "@inertiajs/inertia";
 
 export default {
     components: {
         AuthenticatedLayout,
         Head,
+        Editor,
     },
     props: {
-        post: {type: Object, required: false},
+        post: { type: Object, required: false },
     },
     setup(props) {
         const form = reactive({

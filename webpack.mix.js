@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,13 +11,16 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js("resources/js/app.js", "public/js")
     .vue()
-    .postCss('resources/css/app.css', 'public/css', [
-        require('postcss-import'),
-        require('autoprefixer'),
-    ])
-    .webpackConfig(require('./webpack.config'));
+    .sourceMaps()
+
+    // .postCss('resources/css/app.css', 'public/css', [
+    //     require('postcss-import'),
+    //     require('autoprefixer'),
+    // ])
+    .sass("resources/scss/app.scss", "public/css")
+    .webpackConfig(require("./webpack.config"));
 
 if (mix.inProduction()) {
     mix.version();
