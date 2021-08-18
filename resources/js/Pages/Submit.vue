@@ -8,9 +8,10 @@
             </div>
             <div class="submit__box">
                 <Input class="mb-1" modelPlaceholder="Book"></Input>
-                <div class="editor-container mb-1">
+                <div class="editor-container mb-1" v-show="editorInitialized">
                     <editor
                         apiKey="is6rpblo337k1uxj8x1yvvf8qd5oj4scymd865g6ti1z156p"
+                        @init="editorInitialized = true"
                         :init="{
                             placeholder: 'Let those words out...',
                             menubar: false,
@@ -37,6 +38,7 @@ import Input from "@/Components/Input.vue";
 import Button from "@/Components/Button.vue";
 import Editor from "@tinymce/tinymce-vue";
 import { Head } from "@inertiajs/inertia-vue3";
+import { ref } from "@vue/reactivity";
 
 export default {
     components: {
@@ -46,27 +48,32 @@ export default {
         Input,
         Button,
     },
-    // setup(props) {
-    //     const form = useForm({
-    //         content: null,
-    //         book: null,
-    //         type: "note",
-    //     });
-    //     const submit = async () => {
-    //         await form.post(
-    //             "/post",
-    //             {
-    //                 preserveState: true,
-    //                 preserveScroll: true,
-    //                 onSuccess: (res) => {
-    //                     console.log(res);
-    //                 },
-    //             },
-    //             { resetOnSuccess: false }
-    //         );
-    //     };
-    //     return { form, submit };
-    // },
+    setup(props) {
+        const editorInitialized = ref(false);
+        //     const form = useForm({
+        //         content: null,
+        //         book: null,
+        //         type: "note",
+        //     });
+        //     const submit = async () => {
+        //         await form.post(
+        //             "/post",
+        //             {
+        //                 preserveState: true,
+        //                 preserveScroll: true,
+        //                 onSuccess: (res) => {
+        //                     console.log(res);
+        //                 },
+        //             },
+        //             { resetOnSuccess: false }
+        //         );
+        //     };
+        //     return { form, submit };
+        const test = () => {
+            console.log("test");
+        };
+        return { editorInitialized, test };
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -106,13 +113,10 @@ export default {
             border-bottom: 2px solid $primary;
         }
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background: rgba($gray-2, 0.6);
         }
     }
-}
-.editor-container {
-    min-height: 250px;
-    background: $gray-1;
 }
 </style>
