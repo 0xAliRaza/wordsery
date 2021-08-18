@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150">
+    <button :type="type">
         <slot />
     </button>
 </template>
@@ -14,3 +14,26 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+@import '@scss/abstracts';
+button {
+    @include secondary-font;
+    font-size: pxToRem(15);
+    font-weight: 500;
+    border: none;
+    padding: pxToRem(8) pxToRem(16);
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: $primary;
+    color: $light;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    &:hover, &:focus {
+        outline: none;
+        background: $primary-dark;
+    }
+}
+</style>

@@ -29,6 +29,9 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return Inertia::render('Home', ['post' => Post::latest('created_at')->first()]);
 })->middleware(['auth', 'verified'])->name('home');
+Route::get('/submit', function () {
+    return Inertia::render('Submit');
+})->middleware(['auth', 'verified'])->name('submit');
 Route::post('/post', [PostController::class, 'store'])->middleware(['auth', 'verified']);
 
 

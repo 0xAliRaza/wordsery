@@ -1,7 +1,12 @@
 <template>
     <nav class="nav">
         <div class="nav__container">
-            <a class="nav__brand" href="#">Wordsery</a>
+            <Link
+                class="nav__brand"
+                href="/"
+                active="/"
+                >Wordsery</Link
+            >
             <input type="text" class="nav__search" placeholder="Search" />
             <ul class="nav__list">
                 <li class="nav__list-item">
@@ -18,6 +23,7 @@
                         :href="route('logout')"
                         :active="route().current('logout')"
                         method="post"
+                        as="button"
                         >Log out</Link
                     >
                 </li>
@@ -32,7 +38,9 @@
 
     <!-- Page Content -->
     <main>
-        <slot />
+        <div class="feed">
+            <slot />
+        </div>
     </main>
 </template>
 
@@ -65,16 +73,16 @@ export default {
 <style lang="scss" scoped>
 @import "@scss/abstracts";
 .nav {
+    position: fixed;
     z-index: 1030;
     width: 100%;
     background: $light;
-    font-family: "Source Sans Pro", sans-serif;
     padding: 0px pxToRem(20);
-    border-bottom: 1px solid $gray-1;
-    box-shadow: 0 3px 10px 0 rgba($gray-2, 0.7);
+    box-shadow: 0 3px 10px 0 rgba($gray-3, 0.3);
+    @include secondary-font;
 
     &__container {
-        height: pxToRem(48);
+        height: $nav-height;
         margin: auto;
         display: flex;
         align-items: center;
@@ -89,23 +97,24 @@ export default {
         margin-right: pxToRem(20);
     }
     &__search {
+        background: $gray-1;
         margin-right: pxToRem(20);
-        height: pxToRem(30);
-        background: $light;
-        border: 1px solid $gray-1;
+        height: pxToRem(34);
+        border: 1px solid $gray-2;
         border-radius: 2px;
         width: pxToRem(400);
         padding: 0 pxToRem(10);
-        transition: all 0.3s ease;
+        color: $dark;
         &::placeholder {
             font-size: pxToRem(15);
-            color: $gray-3;
+            color: $gray-5;
         }
+        &:hover,
         &:focus {
             outline: none;
-            border: 1px solid $gray-2;
+            background: $light;
+            @include primary-border;
         }
-
     }
     &__list {
         display: flex;
@@ -120,15 +129,24 @@ export default {
     }
     &__link {
         font-size: pxToRem(16);
-        color: $gray-3;
-        font-weight: 600;
+        color: $gray-5;
+        font-weight: 400;
         padding: pxToRem(10) 0;
         transition: all 0.3s ease;
         &:hover,
         &:focus,
         &:active {
-            color: $gray-6;
+            color: $gray-7;
         }
     }
+}
+
+main {
+    min-height: 100%;
+    padding: $nav-height pxToRem(16) 0;
+}
+.feed {
+    margin: pxToRem(20) auto;
+    max-width: pxToRem(748);
 }
 </style>
