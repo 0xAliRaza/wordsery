@@ -26,9 +26,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', ['post' => Post::latest('created_at')->first()]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/home', function () {
+    return Inertia::render('Home', ['post' => Post::latest('created_at')->first()]);
+})->middleware(['auth', 'verified'])->name('home');
 Route::post('/post', [PostController::class, 'store'])->middleware(['auth', 'verified']);
 
 

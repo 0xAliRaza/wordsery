@@ -3,8 +3,8 @@
 
     <div class="">
         <div v-if="canLogin" class="">
-            <Link v-if="$page.props.auth.user" href="/dashboard" class="">
-                Dashboard
+            <Link v-if="$page.props.auth.user" href="/home" class="">
+                home
             </Link>
 
             <template v-else>
