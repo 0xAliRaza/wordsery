@@ -26,8 +26,8 @@ a {
 button {
   @include secondary-font;
   cursor: pointer;
-  &:hover, &:focus {
-    outline: none;
+  // &:hover, &:focus {
+  //   outline: none;
 
-  }
+  // }
 }

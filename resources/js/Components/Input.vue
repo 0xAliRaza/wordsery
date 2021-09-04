@@ -4,12 +4,13 @@
         @input="$emit('update:modelValue', $event.target.value)"
         :placeholder="modelPlaceholder"
         ref="input"
+        :type="modelType || 'text'"
     />
 </template>
 
 <script>
 export default {
-    props: ["modelValue", "modelPlaceholder"],
+    props: ["modelValue", "modelPlaceholder", "modelType"],
 
     emits: ["update:modelValue"],
 

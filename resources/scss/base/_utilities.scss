@@ -1,7 +1,30 @@
 .mb-1 {
-    margin-bottom: pxToRem(16px)!important;
+    margin-bottom: pxToRem(16px) !important;
 }
 
 .ml-auto {
-    margin-left: auto!important;
+    margin-left: auto !important;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-center {
+    justify-content: center !important;
+    align-items: center !important;
+}
+.flex-center-y {
+    align-items: center !important;
+}
+.flex-center-x {
+    justify-content: center !important;
 }
