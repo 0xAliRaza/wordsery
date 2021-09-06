@@ -22,7 +22,7 @@
                         class="book-card"
                         :book="selectedBook"
                     ></BookCard>
-                    <button class="book-card__remove">remove</button>
+                    <Button @click="selectedBook = null" class="ml-auto small link danger">remove</Button>
                 </div>
 
                 <Input
@@ -146,6 +146,7 @@ export default {
         const selectBook = (book) => {
             console.log(book);
             books.value = null;
+            searchQuery.value = "";
             form.book = book.id;
             selectedBook.value = book;
         };
