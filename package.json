@@ -14,10 +14,13 @@
         "@inertiajs/inertia-vue3": "^0.5.1",
         "@inertiajs/progress": "^0.2.6",
         "@vue/compiler-sfc": "^3.0.5",
+        "@vue/test-utils": "^1.2.2",
         "autoprefixer": "^10.2.4",
         "axios": "^0.21",
+        "babel-jest": "^27.1.0",
         "browser-sync": "^2.27.5",
         "browser-sync-webpack-plugin": "^2.3.0",
+        "jest": "^27.1.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.13",
@@ -26,7 +29,9 @@
         "sass": "^1.37.5",
         "sass-loader": "^12.1.0",
         "vue": "^3.0.5",
-        "vue-loader": "^16.1.2"
+        "vue-jest": "^3.0.7",
+        "vue-loader": "^16.1.2",
+        "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
         "@tinymce/tinymce-vue": "^4.0.4",
