@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <img
-            v-if="book.volumeInfo.imageLinks"
+            v-if="book.volumeInfo.imageLinks.smallThumbnail"
             :src="book.volumeInfo.imageLinks.smallThumbnail"
             :alt="book.volumeInfo.title"
             class="thumb"
@@ -11,7 +11,12 @@
                 {{ book.volumeInfo.title }}
             </div>
             <div class="authors">
-                {{ book.volumeInfo.authors[0] }}
+                <template
+                    v-for="(author, index) in book.volumeInfo.authors"
+                    v-bind:key="index"
+                >
+                    <template v-if="index > 0">, </template>{{ author }}
+                </template>
             </div>
         </div>
     </div>

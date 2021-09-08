@@ -1,0 +1,67 @@
+{
+    "kind": "books#volume",
+    "id": "-8r4PCx1EQQC",
+    "etag": "Ef6cDdn2AN4",
+    "selfLink": "https://www.googleapis.com/books/v1/volumes/-8r4PCx1EQQC",
+    "volumeInfo": {
+        "title": "Test Your English Vocabulary in Use Upper-intermediate Book with Answers",
+        "authors": ["Felicity O'Dell", "Michael McCarthy"],
+        "publisher": "Cambridge University Press",
+        "publishedDate": "2012-08-23",
+        "description": "\"Testing your vocabulary needn't be boring! Use this book for self-study, or in the classrom, to check your progress as you build your vocabulary and become a confident speaker of English.\"--Editor.",
+        "industryIdentifiers": [
+            {
+                "type": "ISBN_13",
+                "identifier": "9781107638785"
+            },
+            {
+                "type": "ISBN_10",
+                "identifier": "110763878X"
+            }
+        ],
+        "readingModes": {
+            "text": false,
+            "image": true
+        },
+        "pageCount": 144,
+        "printType": "BOOK",
+        "categories": ["Foreign Language Study"],
+        "averageRating": 1,
+        "ratingsCount": 1,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=-8r4PCx1EQQC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=-8r4PCx1EQQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=-8r4PCx1EQQC&printsec=frontcover&dq=intitle:test&hl=&cd=1&source=gbs_api",
+        "infoLink": "http://books.google.com/books?id=-8r4PCx1EQQC&dq=intitle:test&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Test_Your_English_Vocabulary_in_Use_Uppe.html?hl=&id=-8r4PCx1EQQC"
+    },
+    "saleInfo": {
+        "country": "PK",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+    },
+    "accessInfo": {
+        "country": "PK",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+            "isAvailable": false
+        },
+        "pdf": {
+            "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=-8r4PCx1EQQC&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+    },
+    "searchInfo": {
+        "textSnippet": "The book can be used on its own, for self-study or in the classroom, or to reinforce the vocabulary covered in English Vocabulary in Use Upper-intermediate Third edition, available separately."
+    }
+}

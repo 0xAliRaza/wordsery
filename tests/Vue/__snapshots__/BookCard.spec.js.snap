@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div class="card"><img src="http://books.google.com/books/content?id=-8r4PCx1EQQC&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_api" alt="Test Your English Vocabulary in Use Upper-intermediate Book with Answers" class="thumb">
+  <div class="meta">
+    <div class="title">Test Your English Vocabulary in Use Upper-intermediate Book with Answers</div>
+    <div class="authors">
+      <!--v-if-->Felicity O'Dell, Michael McCarthy
+    </div>
+  </div>
+</div>
+`;

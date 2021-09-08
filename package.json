@@ -8,7 +8,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "test": "jest"
+        "test": "jest",
+        "testing": "jest --watch"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",
@@ -26,6 +27,7 @@
         "browser-sync": "^2.27.5",
         "browser-sync-webpack-plugin": "^2.3.0",
         "jest": "^27.1.0",
+        "jest-serializer-vue": "^2.0.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.13",

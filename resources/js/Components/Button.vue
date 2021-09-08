@@ -1,6 +1,5 @@
 <template>
     <button
-        @click.prevent
         :type="type"
         :class="{
             small: sm,

@@ -9,4 +9,5 @@ module.exports = {
         ".*\\.vue$": "<rootDir>/node_modules/vue3-jest",
     },
     testEnvironment: "jsdom",
+    snapshotSerializers: ["<rootDir>/node_modules/jest-serializer-vue"],
 };
