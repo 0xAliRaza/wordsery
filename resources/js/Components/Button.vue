@@ -1,5 +1,15 @@
 <template>
-    <button :type="type" :class="{ small: sm }">
+    <button
+        @click.prevent
+        :type="type"
+        :class="{
+            small: sm,
+            link: link,
+            primary: primary,
+            danger: danger,
+            squared: squared,
+        }"
+    >
         <slot />
     </button>
 </template>
@@ -9,8 +19,19 @@ export default {
     props: {
         type: {
             type: String,
-            default: "submit",
+            default: "button",
         },
+        sm: Boolean,
+        link: Boolean,
+        primary: Boolean,
+        danger: Boolean,
+        squared: Boolean,
+    },
+    setup() {
+        const tests = () => {
+            alert("test");
+        };
+        return { tests };
     },
 };
 </script>
@@ -26,17 +47,26 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: $primary;
-    color: $light;
+    background: transparent;
+    color: $dark;
     cursor: pointer;
     text-transform: uppercase;
     transition: all 0.2s ease;
     &:hover,
     &:focus {
         outline: none;
+    }
+}
+
+.primary {
+    background: $primary;
+    color: $light;
+    &:hover,
+    &:focus {
         background: darken($primary, 7);
     }
 }
+
 .danger {
     background: $danger;
     &:hover,
@@ -69,7 +99,6 @@ button {
         background: transparent;
     }
 }
-
 
 .squared {
     border-radius: 4px;

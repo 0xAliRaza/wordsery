@@ -22,7 +22,7 @@
                         class="book-card"
                         :book="selectedBook"
                     ></BookCard>
-                    <Button @click="selectedBook = null" class="ml-auto small link danger">remove</Button>
+                    <Button @click="selectedBook = null" class="ml-auto" sm link danger>remove</Button>
                 </div>
 
                 <Input
@@ -89,7 +89,7 @@
                     >
                     </editor>
                 </div>
-                <Button class="ml-auto">Post</Button>
+                <Button class="ml-auto" primary>Post</Button>
             </div>
         </div>
     </AuthenticatedLayout>
