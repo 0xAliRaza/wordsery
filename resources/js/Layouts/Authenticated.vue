@@ -79,7 +79,6 @@ export default {
     background: $light;
     padding: 0px pxToRem(20);
     box-shadow: 0 3px 10px 0 rgba($gray-3, 0.3);
-    @include secondary-font;
 
     &__container {
         height: $nav-height;

@@ -1,6 +1,6 @@
 <template>
     <div v-show="message">
-        <p class="text-sm text-red-600">
+        <p class="">
             {{ message }}
         </p>
     </div>
@@ -8,6 +8,15 @@
 
 <script>
 export default {
-    props: ['message']
-}
+    props: ["message"],
+};
 </script>
+
+<style lang="scss" scoped>
+@import "@scss/abstracts";
+div > p {
+    font-size: pxToRem(14);
+    color: $danger;
+    padding: 4px;
+}
+</style>

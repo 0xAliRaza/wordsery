@@ -24,10 +24,5 @@ a {
 }
 
 button {
-  @include secondary-font;
   cursor: pointer;
-  // &:hover, &:focus {
-  //   outline: none;
-
-  // }
 }

@@ -37,9 +37,8 @@ export default {
 <style lang="scss" scoped>
 @import "@scss/abstracts";
 button {
-    @include secondary-font;
     font-size: pxToRem(15);
-    font-weight: 500;
+    font-weight: 600;
     border: none;
     padding: pxToRem(8) pxToRem(16);
     border-radius: 100px;
@@ -53,7 +52,12 @@ button {
     transition: all 0.2s ease;
     &:hover,
     &:focus {
-        outline: none;
+        &:not(:disabled) {
+            outline: none;
+        }
+    }
+    &:disabled {
+        cursor: initial;
     }
 }
 
@@ -62,7 +66,12 @@ button {
     color: $light;
     &:hover,
     &:focus {
-        background: darken($primary, 7);
+        &:not(:disabled) {
+            background: darken($primary, 10);
+        }
+    }
+    &:disabled {
+        background: lighten($primary, 10);
     }
 }
 

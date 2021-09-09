@@ -16,81 +16,113 @@
                     Summary
                 </button>
             </div>
-            <div class="submit__box">
-                <div v-if="selectedBook" class="mb-1 flex flex-column">
-                    <BookCard
-                        class="book-card"
-                        :book="selectedBook"
-                    ></BookCard>
-                    <Button @click="selectedBook = null" class="ml-auto" sm link danger>remove</Button>
-                </div>
-
-                <Input
-                    v-else
-                    class="books-input mb-1"
-                    modelPlaceholder="Book"
-                    v-model="searchQuery"
-                    modelType="search"
-                ></Input>
-                <div v-if="books" class="books">
-                    <div class="books__list">
-                        <div
-                            v-for="book in books"
-                            v-bind:key="book.id"
-                            class="books__list-item"
-                            @click="selectBook(book)"
-                            @keyup.enter="selectBook(book)"
-                            @keyup.space="selectBook(book)"
-                            tabindex="0"
+            <form @submit.prevent="submitPost">
+                <div class="submit__box">
+                    <div v-if="selectedBook" class="mb-1 flex flex-column">
+                        <BookCard
+                            class="book-card"
+                            :book="selectedBook"
+                        ></BookCard>
+                        <Button
+                            @click="selectedBook = null"
+                            class="ml-auto"
+                            sm
+                            link
+                            danger
+                            >remove</Button
                         >
-                            <img
-                                v-if="book.volumeInfo.imageLinks"
-                                :src="book.volumeInfo.imageLinks.smallThumbnail"
-                                :alt="book.volumeInfo.title"
-                                class="books__thumb"
-                            />
-                            <div class="books__meta">
-                                <div class="books__title">
-                                    {{ book.volumeInfo.title }}
-                                </div>
-                                <div class="books__authors">
-                                    <template
-                                        v-for="(author, index) in book
-                                            .volumeInfo.authors"
-                                        v-bind:key="author"
-                                    >
-                                        <template v-if="index > 0">, </template
-                                        >{{ author }}
-                                    </template>
+                    </div>
+
+                    <div class="books-query mb-1" v-else>
+                        <Input
+                            modelPlaceholder="Book"
+                            v-model="searchQuery"
+                            modelType="search"
+                        ></Input>
+                        <InputError
+                            v-if="errors.book"
+                            :message="errors.book"
+                        ></InputError>
+                    </div>
+                    <div v-if="books" class="books">
+                        <div class="books__list">
+                            <div
+                                v-for="book in books"
+                                v-bind:key="book.id"
+                                class="books__list-item"
+                                @click="selectBook(book)"
+                                @keyup.enter="selectBook(book)"
+                                @keyup.space="selectBook(book)"
+                                tabindex="0"
+                            >
+                                <img
+                                    v-if="book.volumeInfo.imageLinks"
+                                    :src="
+                                        book.volumeInfo.imageLinks
+                                            .smallThumbnail
+                                    "
+                                    :alt="book.volumeInfo.title"
+                                    class="books__thumb"
+                                />
+                                <div class="books__meta">
+                                    <div class="books__title">
+                                        {{ book.volumeInfo.title }}
+                                    </div>
+                                    <div class="books__authors">
+                                        <template
+                                            v-for="(author, index) in book
+                                                .volumeInfo.authors"
+                                            v-bind:key="author"
+                                        >
+                                            <template v-if="index > 0"
+                                                >, </template
+                                            >{{ author }}
+                                        </template>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="editor-container mb-1" v-if="!editorInitialized">
-                    Loading editor...
-                </div>
-                <div class="mb-1" v-show="editorInitialized">
-                    <editor
-                        apiKey="is6rpblo337k1uxj8x1yvvf8qd5oj4scymd865g6ti1z156p"
-                        @init="editorInitialized = true"
-                        :init="{
-                            placeholder: 'Let those words out...',
-                            menubar: false,
-                            branding: false,
-                            min_height: 250,
-                            plugins: [
-                                'advlist autolink lists link image fullscreen media paste wordcount',
-                            ],
-                            toolbar:
-                                'bold italic link | h3 bullist numlist | image media fullscreen ',
-                        }"
-                        v-model="form.content"
+                    <div
+                        class="editor-container mb-1"
+                        v-if="!editorInitialized"
                     >
-                    </editor>
+                        Loading editor...
+                    </div>
+                    <div class="mb-1" v-show="editorInitialized">
+                        <editor
+                            apiKey="is6rpblo337k1uxj8x1yvvf8qd5oj4scymd865g6ti1z156p"
+                            @init="editorInitialized = true"
+                            :init="{
+                                placeholder: 'Let those words out...',
+                                menubar: false,
+                                branding: false,
+                                min_height: 250,
+                                plugins: [
+                                    'advlist autolink lists link image fullscreen media paste wordcount',
+                                ],
+                                toolbar:
+                                    'bold italic link | h3 bullist numlist | image media fullscreen ',
+                            }"
+                            v-model="form.content"
+                        >
+                        </editor>
+                        <InputError
+                            v-if="errors.content"
+                            :message="errors.content"
+                        ></InputError>
+                    </div>
+                    <Button
+                        class="ml-auto"
+                        primary
+                        type="submit"
+                        :disabled="
+                            form.processing || !form.book || !form.content
+                        "
+                        >Post</Button
+                    >
                 </div>
-                <Button class="ml-auto" primary>Post</Button>
-            </div>
+            </form>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -98,15 +130,18 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import Input from "@/Components/Input.vue";
+import InputError from "@/Components/InputError.vue";
 import Button from "@/Components/Button.vue";
-import Editor from "@tinymce/tinymce-vue";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "@vue/reactivity";
-import { watch } from "@vue/runtime-core";
 import useDebouncedRef from "@/Composables/useDebouncedRef";
 import BookCard from "@/Components/BookCard.vue";
+import Editor from "@tinymce/tinymce-vue";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { ref, watch } from "vue";
 
 export default {
+    props: {
+        errors: Object,
+    },
     components: {
         AuthenticatedLayout,
         Head,
@@ -114,6 +149,7 @@ export default {
         Input,
         Button,
         BookCard,
+        InputError,
     },
     setup(props) {
         const editorInitialized = ref(false);
@@ -151,6 +187,10 @@ export default {
             selectedBook.value = book;
         };
 
+        const submitPost = () => {
+            form.post("/post");
+        };
+
         return {
             editorInitialized,
             form,
@@ -158,6 +198,7 @@ export default {
             books,
             selectBook,
             selectedBook,
+            submitPost,
         };
     },
 };
@@ -216,7 +257,7 @@ export default {
     }
 }
 
-.books-input {
+.books-query {
     z-index: 1021;
 }
 .books {
@@ -267,7 +308,6 @@ export default {
         color: $gray-6;
     }
 }
-
 
 .book-card {
     &__remove {

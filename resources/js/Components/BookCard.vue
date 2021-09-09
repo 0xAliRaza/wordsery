@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <img
-            v-if="book.volumeInfo.imageLinks.smallThumbnail"
+            v-if="book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail"
             :src="book.volumeInfo.imageLinks.smallThumbnail"
             :alt="book.volumeInfo.title"
             class="thumb"
@@ -53,7 +53,7 @@ export default {
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    padding: 0 pxToRem(16);
+    padding: pxToRem(16);
 }
 .title {
     font-size: pxToRem(16);
