@@ -8,6 +8,7 @@ html {
 }
 body {
   background-color: $gray-2;
+  hyphens: auto;
 }
 *, *:before, *:after {
   padding: 0;

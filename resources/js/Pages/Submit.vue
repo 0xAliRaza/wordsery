@@ -258,10 +258,10 @@ export default {
 }
 
 .books-query {
-    z-index: 1021;
+    z-index: 102;
 }
 .books {
-    z-index: 1020;
+    z-index: 101;
     position: relative;
     &__list {
         position: absolute;

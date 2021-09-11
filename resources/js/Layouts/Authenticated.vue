@@ -74,7 +74,7 @@ export default {
 @import "@scss/abstracts";
 .nav {
     position: fixed;
-    z-index: 1030;
+    z-index: 109;
     width: 100%;
     background: $light;
     padding: 0px pxToRem(20);
