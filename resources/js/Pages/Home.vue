@@ -2,22 +2,27 @@
     <Head title="Home" />
 
     <AuthenticatedLayout>
-            <CreatePostButton class="mb-1"></CreatePostButton>
-        <div class="feed__box">
-        </div>
+        <transition name="fade">
+            <toast @close="removeMessage" v-if="message">{{ message }}</toast>
+        </transition>
+
+        <CreatePostButton class="mb-1"></CreatePostButton>
+        <div class="feed__box"></div>
     </AuthenticatedLayout>
 </template>
 <script>
 import AuthenticatedLayout from "@/Layouts/Authenticated.vue";
-import CreatePostButton from '@/Components/CreatePostButton.vue';
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { ref } from "@vue/reactivity";
+import CreatePostButton from "@/Components/CreatePostButton.vue";
+import { Head, useForm, usePage } from "@inertiajs/inertia-vue3";
+import { computed, ref } from "@vue/reactivity";
+import Toast from "@/Components/Toast.vue";
 
 export default {
     components: {
         AuthenticatedLayout,
         Head,
         CreatePostButton,
+        Toast,
     },
     setup(props) {
         const formVisible = ref(false);
@@ -35,12 +40,18 @@ export default {
                 { resetOnSuccess: false }
             );
         };
-        return { formVisible, form, submit };
+        const message = computed(() => usePage().props.value.message);
+        const visible = ref(true);
+        const removeMessage = () => {
+            visible.value = false;
+            usePage().props.value.message = null;
+        };
+        return { formVisible, form, submit, message, removeMessage, visible };
     },
 };
 </script>
 <style lang="scss" scoped>
-@import '@scss/abstracts';
+@import "@scss/abstracts";
 .feed__box {
     @include gray-border;
     border-radius: 4px;
@@ -49,5 +60,12 @@ export default {
     height: 350px;
 }
 
-
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 150ms ease-out;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
 </style>

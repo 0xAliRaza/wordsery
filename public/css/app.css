@@ -361,6 +361,9 @@ html {
 
 body {
   background-color: #dee5eb;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 
 *, *:before, *:after {
