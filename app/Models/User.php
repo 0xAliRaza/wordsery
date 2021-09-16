@@ -40,4 +40,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the posts owned by this user.
+     * 
+     * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::hasMany
+     */
+    function posts() {
+        return $this->hasMany(Post::class);
+    }
 }

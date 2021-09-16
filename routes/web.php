@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Post;
+use App\Http\Controllers\HomeController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -26,9 +26,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/home', function () {
-    return Inertia::render('Home', ['post' => Post::latest('created_at')->first()]);
-})->middleware(['auth', 'verified'])->name('home');
+Route::match(['POST', 'GET'], '/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+
 Route::get('/submit', function () {
     return Inertia::render('Submit');
 })->middleware(['auth', 'verified'])->name('submit');
@@ -37,4 +36,4 @@ Route::post('/post', [PostController::class, 'store'])->middleware(['auth', 'ver
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
