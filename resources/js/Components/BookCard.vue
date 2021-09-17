@@ -1,10 +1,13 @@
 <template>
     <div class="card">
         <img
-            v-if="book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail"
+            v-if="
+                book.volumeInfo.imageLinks &&
+                book.volumeInfo.imageLinks.smallThumbnail
+            "
             :src="book.volumeInfo.imageLinks.smallThumbnail"
             :alt="book.volumeInfo.title"
-            class="thumb"
+            :class="{ thumb: true, 'thumb--compact': compact }"
         />
         <div class="meta">
             <div class="title">
@@ -29,6 +32,7 @@ export default {
             type: Object,
             required: true,
         },
+        compact: Boolean,
     },
     setup() {},
 };
@@ -47,6 +51,9 @@ export default {
     width: 100%;
     max-width: pxToRem(60);
     height: auto;
+    &--compact {
+        max-width: pxToRem(50);
+    }
 }
 .meta {
     display: flex;

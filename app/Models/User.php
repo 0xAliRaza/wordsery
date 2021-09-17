@@ -30,6 +30,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'email',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'id',
     ];
 
     /**
@@ -46,7 +51,8 @@ class User extends Authenticatable
      * 
      * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::hasMany
      */
-    function posts() {
+    function posts()
+    {
         return $this->hasMany(Post::class);
     }
 }
