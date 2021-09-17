@@ -27,10 +27,6 @@ export default {
         squared: Boolean,
     },
     setup() {
-        const tests = () => {
-            alert("test");
-        };
-        return { tests };
     },
 };
 </script>

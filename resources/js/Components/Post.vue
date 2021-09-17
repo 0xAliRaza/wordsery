@@ -1,12 +1,12 @@
 <template>
     <div class="post">
-        <div>{{post.content}}</div>
+        <div v-html="post.content"></div>
     </div>
 </template>
 
 <script>
 export default {
-    props: {post: Object},
+    props: { post: Object },
     setup() {},
 };
 </script>
@@ -18,5 +18,6 @@ export default {
     border-radius: 4px;
     padding: pxToRem(16);
     background: $light;
+    cursor: pointer;
 }
 </style>

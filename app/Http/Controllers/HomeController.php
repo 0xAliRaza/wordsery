@@ -10,6 +10,6 @@ class HomeController extends Controller
 {
     function index()
     {
-        return Inertia::render('Home', ['posts' => Inertia::lazy(fn () => Post::orderBy('id')->cursorPaginate(10))]);
+        return Inertia::render('Home', ['posts' => Inertia::lazy(fn () => Post::orderBy('id', 'desc')->cursorPaginate(15))]);
     }
 }

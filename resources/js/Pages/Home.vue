@@ -7,12 +7,18 @@
         </transition>
 
         <CreatePostButton class="mb-1"></CreatePostButton>
-        <div class="feed__box">
+        <div class="feed">
             <Post
                 v-for="post in loadedPosts.models"
                 :key="post.id"
                 :post="post"
+                class="mb-1"
             ></Post>
+            <div class="feed__load-more">
+                <Button v-if="loadedPosts.nextCursor" primary @click="loadPosts"
+                    >Load more</Button
+                >
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -23,6 +29,7 @@ import { Head, useForm, usePage } from "@inertiajs/inertia-vue3";
 import { computed, reactive, ref } from "@vue/reactivity";
 import Toast from "@/Components/Toast.vue";
 import Post from "@/Components/Post.vue";
+import Button from "@/Components/Button.vue";
 import { Inertia } from "@inertiajs/inertia";
 import { onMounted, watchEffect } from "@vue/runtime-core";
 
@@ -33,6 +40,7 @@ export default {
         CreatePostButton,
         Toast,
         Post,
+        Button,
     },
     props: { posts: Object },
     setup(props) {
@@ -63,9 +71,11 @@ export default {
         });
         const loadPosts = () => {
             Inertia.visit("/home", {
+                data: { cursor: loadedPosts.nextCursor },
                 only: ["posts"],
                 method: "POST",
                 preserveState: true,
+                preserveScroll: true,
             });
         };
         onMounted(() => {
@@ -76,7 +86,7 @@ export default {
                 loadedPosts.models.push(...props.posts.data);
                 if (props.posts.next_page_url) {
                     loadedPosts.nextCursor =
-                        props.posts.next_page_url.match(/(?<=\?cursor=).*/g)[0];
+                        props.posts.next_page_url.match(/(?<=\?cursor=).*/)[0];
                 } else {
                     loadedPosts.nextCursor = "";
                 }
@@ -90,13 +100,18 @@ export default {
             removeMessage,
             visible,
             loadedPosts,
+            loadPosts,
         };
     },
 };
 </script>
 <style lang="scss" scoped>
 @import "@scss/abstracts";
-.feed__box {
+.feed {
+    &__load-more {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .fade-enter-active,

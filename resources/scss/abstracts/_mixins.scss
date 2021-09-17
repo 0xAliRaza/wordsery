@@ -6,9 +6,10 @@
 
 @mixin gray-border {
     border: 1px solid $gray-3;
+    transition: border 100ms;
     &:hover,
     &:focus {
-        border: 1px solid $gray-4;
+        border: 1px solid $gray-5;
         outline: none;
     }
 }
