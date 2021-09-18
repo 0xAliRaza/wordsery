@@ -1,8 +1,8 @@
 <template>
     <div class="post">
         <user-card
-            v-if="user"
-            :user="user"
+            v-if="post.user"
+            :user="post.user"
             :created_at="post.created_at"
         ></user-card>
         <div v-html="post.content"></div>
@@ -11,19 +11,18 @@
 </template>
 
 <script>
-import { computed, ref } from "@vue/reactivity";
-import { watchEffect } from "@vue/runtime-core";
+import { ref } from "@vue/reactivity";
+import { onMounted } from "@vue/runtime-core";
 import BookCard from "@/Components/BookCard";
 import axios from "axios";
 import UserCard from "./UserCard.vue";
-import { usePage } from "@inertiajs/inertia-vue3";
 export default {
     props: { post: { type: Object, required: true } },
     components: { BookCard, UserCard },
     setup(props) {
         const book = ref(null);
-        watchEffect(() => {
-            if (props.post.book) {
+        onMounted(() => {
+            if (!book.value) {
                 axios
                     .get(
                         `https://www.googleapis.com/books/v1/volumes/${props.post.book}`
@@ -36,14 +35,10 @@ export default {
                         }
                     })
                     .catch((e) => console.log(e));
-            } else {
-                book.value = null;
             }
         });
 
-        const user = computed(() => usePage().props.value.auth.user);
-
-        return { book, user };
+        return { book };
     },
 };
 </script>
@@ -56,5 +51,6 @@ export default {
     padding: pxToRem(16);
     background: $light;
     cursor: pointer;
+    user-select: none;
 }
 </style>

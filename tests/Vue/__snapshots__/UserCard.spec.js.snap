@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserCard.vue renders correctly 1`] = `
-<div user="[object Object]" created_at="TEST_CREATED_AT">
-  <!-- By <a href="#">{{ user.name }}</a> at <span>{{ created_at }}</span> -->
-</div>
-`;
+exports[`UserCard.vue renders correctly 1`] = `<div> By <a href="#">TEST_USER</a> at <span>TEST_CREATED_AT</span></div>`;
