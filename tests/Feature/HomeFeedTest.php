@@ -6,11 +6,12 @@ use App\Models\Post;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\Assert;
 
 class HomeFeedTest extends TestCase
 {
-
+    use RefreshDatabase;
     public function test_home_page_can_be_rendered()
     {
         $user = User::factory()->make();
