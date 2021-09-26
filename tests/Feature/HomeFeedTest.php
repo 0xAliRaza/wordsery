@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Book;
 use App\Models\Post;
 use Tests\TestCase;
 use App\Models\User;
@@ -11,7 +12,7 @@ use Inertia\Testing\Assert;
 
 class HomeFeedTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
     public function test_home_page_can_be_rendered()
     {
         $user = User::factory()->make();
@@ -24,8 +25,7 @@ class HomeFeedTest extends TestCase
     public function test_user_cannot_get_posts_without_inertia_request()
     {
         $user = User::factory()->create();
-        Post::factory()->count(30)->for($user)->state(new Sequence(['type' => 'note'], ['type' => 'summary']))->create();
-
+        $books = Book::factory()->count(10)->hasAuthors()->has(Post::factory()->count(5)->for($user))->create();
         $response = $this->actingAs($user)->post('/home');
         $response->assertInertia(
             fn ($page) => $page

@@ -18,4 +18,13 @@ class Book extends Model
     {
         return $this->belongsToMany(Author::class, 'book_author');
     }
+
+
+    /**
+     * Get the related post models.
+     */
+    function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

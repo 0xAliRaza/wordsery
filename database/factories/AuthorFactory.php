@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
+use App\Models\Author;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
-class PostFactory extends Factory
+class AuthorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Post::class;
+    protected $model = Author::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +22,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'content' => $this->faker->realTextBetween(300, 600),
-            'type' => $this->faker->randomElement(['story', 'summary']),
+            'name' => $this->faker->name(),
         ];
     }
 }
