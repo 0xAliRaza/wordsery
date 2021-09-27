@@ -155,7 +155,7 @@ export default {
         const editorInitialized = ref(false);
         const form = useForm({
             content: "",
-            book: "",
+            book: null,
             type: "note",
         });
         const books = ref(null);
@@ -180,10 +180,22 @@ export default {
         });
         const selectedBook = ref(null);
         const selectBook = (book) => {
-            console.log(book);
+            const filteredBook = {};
+            filteredBook.google_uuid = book.id;
+            filteredBook.title = book.volumeInfo.title;
+            filteredBook.subtitle = book.volumeInfo.subtitle || "";
+            filteredBook.publisher = book.volumeInfo.publisher;
+            filteredBook.published_date =
+                new Date(book.volumeInfo.publishedDate).getYear() + 1900;
+            filteredBook.self_link = book.selfLink;
+            filteredBook.thumbnail_link =
+                book.volumeInfo.imageLinks.smallThumbnail ||
+                book.volumeInfo.imageLinks.thumbnail ||
+                "";
+            filteredBook.authors = book.volumeInfo.authors;
             books.value = null;
             searchQuery.value = "";
-            form.book = book.id;
+            form.book = filteredBook;
             selectedBook.value = book;
         };
 

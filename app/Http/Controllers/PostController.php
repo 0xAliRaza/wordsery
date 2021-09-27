@@ -2,35 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
 
     /**
-     * @param Request $request
+     * @param StorePostRequest $request
      * @return 
      */
-    function store(Request $request)
+    function store(StorePostRequest $request)
     {
-        $request->validate([
-            'content' => 'required|string',
-            'type' => 'required|string|in:note,summary',
-            'book' => 'required|array',
-            'book.title' => 'required|string|max:255',
-            'book.google_uuid' => 'required|string|max:255',
-            'book.subtitle' => 'nullable|string|max:255',
-            'book.publisher' => 'required|string|max:255',
-            'book.published_date' => 'required|integer|max:' . date("Y"),
-            'book.self_link' => 'required|string|max:2048',
-            'book.thumbnail_link' => 'nullable|string|max:2048',
-            'book.authors' => 'required|array',
-            'book.authors.*' => 'required|string|distinct|max:255'
-        ]);
 
         $book = Book::firstOrCreate(['google_uuid' => $request->book['google_uuid']], [
             'title' => $request->book['title'],
@@ -57,9 +43,6 @@ class PostController extends Controller
         $post->type = $request->type;
         $post->user_id = auth()->user()->id;
         $post->book_id = $book->id;
-        // // ['content' => $request->content, 'type' => $request->type, 'book_id' => $book->id, 'user_id' => auth()->user()->id]);
-        // $post->user()->save(auth()->user());
-        // $post->book()->save($book);
         $post->save();
 
         Session::flash('message', 'Post was successfully created.');
