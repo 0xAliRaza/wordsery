@@ -23,13 +23,14 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(100),
+            'title' => $this->faker->realText(80),
             'google_uuid' => $this->faker->unique()->uuid(),
             'subtitle' => $this->faker->realTextBetween(150),
             'publisher' => $this->faker->realTextBetween(100, 150),
             'published_date' => $this->faker->year(),
             'self_link' => $this->faker->url(),
-            'thumbnail_link' => $this->faker->url()
+            'thumbnail_link' => 'https://source.unsplash.com/random/128x164?' . $this->faker->word(),
+            // 'thumbnail_link' => 'https://source.unsplash.com/random/128x164?',
         ];
     }
 }

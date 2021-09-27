@@ -12,6 +12,20 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = ['content', 'type'];
+
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id',
+        'user_id',
+        'book_id',
+    ];
+
+
     /**
      * Get the user that owns the post.
      */
@@ -19,8 +33,8 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
-    
+
+
     /**
      * Get the post book model.
      */

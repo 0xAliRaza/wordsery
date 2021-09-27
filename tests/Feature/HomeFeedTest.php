@@ -25,7 +25,7 @@ class HomeFeedTest extends TestCase
     public function test_user_cannot_get_posts_without_inertia_request()
     {
         $user = User::factory()->create();
-        $books = Book::factory()->count(10)->hasAuthors()->has(Post::factory()->count(5)->for($user))->create();
+        Book::factory()->count(10)->hasAuthors()->has(Post::factory()->count(5)->for($user))->create();
         $response = $this->actingAs($user)->post('/home');
         $response->assertInertia(
             fn ($page) => $page

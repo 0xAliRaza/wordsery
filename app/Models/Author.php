@@ -12,6 +12,22 @@ class Author extends Model
 
     protected $fillable = ['name'];
 
+
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+        'pivot',
+    ];
+
+
+
     /**
      * Get the related post models.
      */

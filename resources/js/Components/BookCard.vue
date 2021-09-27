@@ -1,24 +1,21 @@
 <template>
     <div class="card">
         <img
-            v-if="
-                book.volumeInfo.imageLinks &&
-                book.volumeInfo.imageLinks.smallThumbnail
-            "
-            :src="book.volumeInfo.imageLinks.smallThumbnail"
-            :alt="book.volumeInfo.title"
+            v-if="book.thumbnail_link"
+            :src="book.thumbnail_link"
+            :alt="book.title"
             :class="{ thumb: true, 'thumb--compact': compact }"
         />
         <div class="meta">
             <div class="title">
-                {{ book.volumeInfo.title }}
+                {{ book.title }}
             </div>
             <div class="authors">
                 <template
-                    v-for="(author, index) in book.volumeInfo.authors"
+                    v-for="(author, index) in book.authors"
                     v-bind:key="index"
                 >
-                    <template v-if="index > 0">, </template>{{ author }}
+                    <template v-if="index > 0">, </template>{{ author.name }}
                 </template>
             </div>
         </div>

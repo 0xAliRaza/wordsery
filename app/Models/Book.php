@@ -12,6 +12,17 @@ class Book extends Model
     public $fillable = ['title', 'google_uuid', 'subtitle', 'publisher', 'published_date', 'self_link', 'thumbnail_link'];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
      * Get the related author models.
      */
     function authors()

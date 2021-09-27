@@ -10,6 +10,6 @@ class HomeController extends Controller
 {
     function index()
     {
-        return Inertia::render('Home', ['posts' => Inertia::lazy(fn () => Post::with(['user'])->orderBy('id', 'desc')->cursorPaginate(15))]);
+        return Inertia::render('Home', ['posts' => Inertia::lazy(fn () => Post::with(['user', 'book.authors'])->orderBy('id', 'desc')->cursorPaginate(15))]);
     }
 }

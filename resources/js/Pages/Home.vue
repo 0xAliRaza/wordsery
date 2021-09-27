@@ -10,7 +10,7 @@
         <div class="feed">
             <Post
                 v-for="post in loadedPosts.models"
-                :key="post.id"
+                :key="post.google_uuid"
                 :post="post"
                 class="mb-1"
             ></Post>

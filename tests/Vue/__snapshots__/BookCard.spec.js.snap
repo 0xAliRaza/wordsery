@@ -4,10 +4,8 @@ exports[`renders correctly 1`] = `
 <div class="card">
   <!--v-if-->
   <div class="meta">
-    <div class="title">Test Your English Vocabulary in Use Upper-intermediate Book with Answers</div>
-    <div class="authors">
-      <!--v-if-->Felicity O'Dell, Michael McCarthy
-    </div>
+    <div class="title"></div>
+    <div class="authors"></div>
   </div>
 </div>
 `;

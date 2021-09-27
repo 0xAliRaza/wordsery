@@ -3,8 +3,8 @@ import BookCard from "@/Components/BookCard";
 import book from "./book.json";
 
 
-const factory = (props = { book }) => {
-    return shallowMount(BookCard, {
+const factory = async (props = { book }) => {
+    return await shallowMount(BookCard, {
         props: { ...props },
     });
 };
